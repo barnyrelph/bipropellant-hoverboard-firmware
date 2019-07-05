@@ -65,7 +65,7 @@ startup_stm32f103xe.s
 #######################################
 # binaries
 #######################################
-PREFIX = arm-none-eabi-
+PREFIX = ../gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-
 CC = $(PREFIX)gcc
 AS = $(PREFIX)gcc -x assembler-with-cpp
 CP = $(PREFIX)objcopy
