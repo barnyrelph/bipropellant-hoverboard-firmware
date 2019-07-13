@@ -16,12 +16,14 @@
   #define HOVERBOARD_WITH_SOFTWARE_SERIAL_B2_C9_6WORDSENSOR 5
 
   // thoery says this is the only thing you need to change....
-  #define CONTROL_TYPE HOVERBOARD_WITH_SOFTWARE_SERIAL_B2_C9
+  //#define CONTROL_TYPE HOVERBOARD_WITH_SOFTWARE_SERIAL_B2_C9
+  #define CONTROL_TYPE 0
   //////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////
   // implementaiton of specific for macro control types
   // provide a short explaination here
+
   #if (CONTROL_TYPE == HOVERBOARD_WITH_SOFTWARE_SERIAL_B2_C9)
     // this control type allows the board to be used AS a hoverboard,
     // responding to sensor movements when in hoverboard mode.
@@ -283,13 +285,16 @@
 // ADC-calibration to cover the full poti-range: connect potis to left sensor board cable (0 to 3.3V) (do NOT use the red 15V wire in the cable!). see <How to calibrate>. turn the potis to minimum position, write value 1 to ADC1_MIN and value 2 to ADC2_MIN. turn to maximum position and repeat it for ADC?_MAX. make, flash and test it.
 // Check out https://github.com/bipropellant/bipropellant-hoverboard-firmware/wiki/ADC-Configurations for sample configurations.
 
-//#define CONTROL_ADC               // use ADC as input. disable DEBUG_SERIAL_USART2!
+#define CONTROL_ADC               // use ADC as input. disable DEBUG_SERIAL_USART2!
+//#undef DEBUG_SERIAL_USART2
+//#undef SERIAL_USART2_IT
+
 #ifndef ADC1_MIN
   #define ADC1_MIN         0        // min ADC1-value while poti at minimum-position (0 - 4095)
 #endif
 
 #ifndef ADC1_ZERO
-  #define ADC1_ZERO     1500        // ADC1-value while poti at zero-position (0 - 4095)
+  #define ADC1_ZERO     0        // ADC1-value while poti at zero-position (0 - 4095)
 #endif
 
 #ifndef ADC1_MAX
@@ -297,11 +302,11 @@
 #endif
 
 #ifndef ADC1_MULT_NEG
-  #define ADC1_MULT_NEG  500.0f     // Use 1000.0f to calibrate from MIN to MAX
+  #define ADC1_MULT_NEG  0.0f     // Use 1000.0f to calibrate from MIN to MAX
 #endif
 
 #ifndef ADC1_MULT_POS
-  #define ADC1_MULT_POS 1500.0f     // Use 1000.0f to calibrate from MIN to MAX
+  #define ADC1_MULT_POS 1000.0f     // Use 1000.0f to calibrate from MIN to MAX
 #endif
 
 
@@ -310,7 +315,7 @@
 #endif
 
 #ifndef ADC2_ZERO
-  #define ADC2_ZERO     2000        // ADC2-value while poti at zero-position (0 - 4095)
+  #define ADC2_ZERO     2047        // ADC2-value while poti at zero-position (0 - 4095)
 #endif
 
 #ifndef ADC2_MAX
@@ -318,11 +323,11 @@
 #endif
 
 #ifndef ADC2_MULT_NEG
-  #define ADC2_MULT_NEG  300.0f     // Use 1000.0f to calibrate from MIN to MAX
+  #define ADC2_MULT_NEG  0.0f     // Use 1000.0f to calibrate from MIN to MAX
 #endif
 
 #ifndef ADC2_MULT_POS
-  #define ADC2_MULT_POS  300.0f     // Use 1000.0f to calibrate from MIN to MAX
+  #define ADC2_MULT_POS  0.0f     // Use 1000.0f to calibrate from MIN to MAX
 #endif
 
 
@@ -331,7 +336,7 @@
 #endif
 
 #ifndef ADC_OFF_END
-  #define ADC_OFF_END   1000          // End Value of Area at which other inputs can be active (0 - 4095) Applies to Speed ADC
+  #define ADC_OFF_END   0          // End Value of Area at which other inputs can be active (0 - 4095) Applies to Speed ADC
 #endif
 
 #ifndef ADC_OFF_FILTER
@@ -365,7 +370,7 @@
 
 // ############################### SERIAL PROTOCOL ###############################
 #define NO_PROTOCOL 0
-#define INCLUDE_PROTOCOL2 2 // enables processing of input characters through 'machine_protocol.c'
+#define INCLUDE_PROTOCOL NO_PROTOCOL // enables processing of input characters through 'machine_protocol.c'
 
 //#define INCLUDE_PROTOCOL NO_PROTOCOL
 #ifndef INCLUDE_PROTOCOL
